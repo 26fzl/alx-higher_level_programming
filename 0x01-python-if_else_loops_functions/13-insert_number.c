@@ -1,47 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 
 /**
- * insert_node - inserts a node sorted in a linked list of ints
- * @head: double pointer to head of LL, needed for modification in edge
- * cases
- * @number: data for new node
- *
- * Return: pointer to newly created node, NULL on failure
+ * print_listint - prints all elements of a listint_t list
+ * @h: pointer to head of list
+ * Return: number of nodes
  */
-listint_t *insert_node(listint_t **head, int number)
+size_t print_listint(const listint_t *h)
 {
-	listint_t *cur_node = NULL, *new_node = NULL;
+	const listint_t *current;
+	unsigned int x; /* number of nodes */
 
-	if (!head)
+	current = h;
+	x = 0;
+	while (current != NULL)
+	{
+		printf("%i\n", current->x);
+		current = current->next;
+		x++;
+	}
+
+	return (x);
+}
+
+/**
+ * add_nodeint_end - adds a new node at the end of a listint_t list
+ * @head: pointer to pointer of first node of listint_t list
+ * @n: integer to be included in new node
+ * Return: address of the new element or NULL if it fails
+ */
+listint_t *add_nodeint_end(listint_t **head, const int n)
+{
+	listint_t *new;
+	listint_t *current;
+
+	current = *head;
+
+	new = malloc(sizeof(listint_t));
+	if (new == NULL)
 		return (NULL);
-	else if (!(*head))
+
+	new->n = n;
+	new->next = NULL;
+
+	if (*head == NULL)
+		*head = new;
+	else
 	{
-		new_node = create_node(number);
-		*head = new_node;
-		return (new_node);
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new;
 	}
-	cur_node = *head;
-	while (cur_node)
+
+	return (new);
+}
+
+/**
+ * free_listint - frees a listint_t list
+ * @head: pointer to list to be freed
+ * Return: void
+ */
+void free_listint(listint_t *head)
+{
+	listint_t *current;
+
+	while (head != NULL)
 	{
-		/* need to insert at head */
-		if (cur_node->n >= number)
-		{
-			new_node = create_node(number);
-			new_node->next = cur_node;
-			*head = new_node;
-			return (new_node);
-		}
-		else if (cur_node->n <= number)
-		{
-			if (!cur_node->next || cur_node->next->n >= number)
-			{
-				new_node = create_node(number);
-				new_node->next = cur_node->next;
-				cur_node->next = new_node;
-				return (cur_node->next);
-			}
-		}
-		cur_node = cur_node->next;
+		current = head;
+		head = head->next;
+		free(current);
 	}
-	return (NULL); /* failed */
 }
