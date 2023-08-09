@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Defines a text-indentation function.
+Module text_indentation
+Adds two new lines after a set of characters.
 """
 
 def text_indentation(text):
