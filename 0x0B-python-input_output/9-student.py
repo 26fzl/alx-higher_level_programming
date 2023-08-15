@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Student to JSON"""
+"""Defines a class Student"""
 
 
 class Student:
@@ -11,4 +11,5 @@ class Student:
         self.age = age
 
     def to_json(self):
+        """Return the dictionary represntation of a simple data structure."""
         return self.__dict__
