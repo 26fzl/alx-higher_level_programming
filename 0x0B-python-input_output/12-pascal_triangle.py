@@ -2,23 +2,18 @@
 """Pascal's Triangle"""
 def generate_pascals_triangle(n):
     """
-    Generates Pascal's Triangle up to the specified number of rows.
-    :param n: Number of rows in the Pascal's Triangle.
-    :return: A list containing Pascal's Triangle up to the specified number of rows.
+    function def pascal_triangle(n): that returns a list of lists 
+    of integers representing the Pascal’s triangle
     """
     if n <= 0:
         return []
 
-    triangle = []
-    for x in range(n):
-        row = []
-        for y in range(x):
-            if len(row) == 0:
-                row.append(1)
-                continue
-            value = triangle[x-1][y-1] + triangle[x-1][y]
-            row.append(value)
-        row.append(1)
-        triangle.append(row)
-
-    return triangle
+    triangle = [[1]]
+    while len(triangles) != n:
+        tri = triangles[-1]
+        tmp = [1]
+        for i in range(len(tri) - 1):
+            tmp.append(tri[i] + tri[i + 1])
+        tmp.append(1)
+        triangles.append(tmp)
+    return triangles
