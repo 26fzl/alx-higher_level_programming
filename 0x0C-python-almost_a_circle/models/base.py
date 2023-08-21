@@ -1,18 +1,15 @@
 #!/usr/bin/python3
-"""Defines base class"""
+"""Defines a base model class."""
 import json
 import csv
 import turtle
 
 
 class Base:
-  """Represents the base class
-
-    Obsrv:
-        The class is used to manage id attribute
-        in all your future classes and to avoid duplicating
-        the same code (by extension, same bugs)
-
+    """Represent the base model.
+    Represents the "base" for all other classes in project 0x0C*.
+    Attributes:
+        __nb_objects (int): The number of instantiated Bases.
     """
 
     __nb_objects = 0
