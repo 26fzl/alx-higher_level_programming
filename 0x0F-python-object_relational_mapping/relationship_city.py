@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""def of city classes"""
-
-from model_state import Base
+"""
+Contains the class definition of a City
+"""
+from relationship_state import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
