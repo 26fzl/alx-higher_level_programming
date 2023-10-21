@@ -1,17 +1,28 @@
 #!/usr/bin/python3
-"""contain  models states"""
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
-from relationship_city import Base, City
+"""
+State classes
+"""
 
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationshipi
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 
 class State(Base):
-    """Represents a state for a MySQL database
     """
- __tablename__ = "states"
+    State classes
+
+    Attributes:
+        __tablename__ (str): The table name of the class
+        id (int): The State id of the class
+        name (str): The State name of the class
+        cities (:obj:`City`): The Cities belongs to State
+
+    """
+    __tablename__ = 'states'
+
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
-
     cities = relationship("City", backref="state", cascade="all, delete")
