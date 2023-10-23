@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """
-This script connects to a MySQL database, creates a new State object
-(California) and a new City object (San Francisco), establishes a
-relationship between them, and commits the changes to the database.
+Creates the State "California" with the City "San Francisco" from a Database
 """
 
 from sys import argv
@@ -12,7 +10,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
-
+"""
+    Access to database,start creating new State object (California) and a
+    new City object (San Francisco), make a relationship between
+    them, to finally commit the changes to the database.
+"""
     database = 'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
         argv[1], argv[2], argv[3])
     eng = create_engine(database)

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" prints the State object with the name passed as argument from the database
+"""
+prints the State object with the name passed as argument from the database
 """
 import sys
 from relationship_state import Base, State
@@ -10,6 +11,11 @@ from sqlalchemy.orm import relationship
 
 
 if __name__ == "__main__":
+"""
+    Access to database,start creating new State object (California) and a
+    new City object (San Francisco), make a relationship between
+    them, to finally commit the changes to the database.
+"""
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
                            .format(sys.argv[1], sys.argv[2], sys.argv[3]))
     Base.metadata.create_all(engine)

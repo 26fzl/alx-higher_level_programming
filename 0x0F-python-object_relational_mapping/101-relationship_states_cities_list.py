@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""lists all State objects, and corresponding City objects
+"""
+lists all State objects, and corresponding City objects
 """
 
 import sys
@@ -10,6 +11,11 @@ from sqlalchemy.orm import Session
 from sqlalchemy.schema import Table
 
 if __name__ == "__main__":
+"""
+    Access to database,start creating new State object (California) and a
+    new City object (San Francisco), make a relationship between
+    them, to finally commit the changes to the database.
+"""
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
                            .format(sys.argv[1], sys.argv[2],
                                    sys.argv[3]), pool_pre_ping=True)
