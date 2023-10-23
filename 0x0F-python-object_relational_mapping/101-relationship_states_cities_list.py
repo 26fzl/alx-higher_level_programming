@@ -1,30 +1,22 @@
 #!/usr/bin/python3
+""" prints the State object with the name passed as argument from the database
 """
-lists all State objects, and corresponding City objects
-"""
-
 import sys
 from relationship_state import Base, State
 from relationship_city import City
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from sqlalchemy.schema import Table
+from sqlalchemy import (create_engine)
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import relationship
+
 
 if __name__ == "__main__":
-"""
-    Access to database,start creating new State object (California) and a
-    new City object (San Francisco), make a relationship between
-    them, to finally commit the changes to the database.
-"""
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                           .format(sys.argv[1], sys.argv[2],
-                                   sys.argv[3]), pool_pre_ping=True)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
     Base.metadata.create_all(engine)
-
-    session = Session(engine)
-    new_city = City(name='San Francisco')
-    new = State(name='California')
-    new.cities.append(new_city)
-    session.add_all([new, new_city])
-    session.commit()
-    session.close()
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    for instance in session.query(State).order_by(State.id):
+        print(instance.id, instance.name, sep=": ")
+        for city_ins in instance.cities:
+            print("    ", end="")
+            print(city_ins.id, city_ins.name, sep=": ")
