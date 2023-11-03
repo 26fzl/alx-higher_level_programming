@@ -5,10 +5,10 @@ import urllib.parse
 import sys
 
 if __name__ == "__main__":
-    url = argv[1]
-    email = argv[2]
-    data = parse.urlencode({'email': email}).encode('utf-8')
-    req = request.Request(url, data)
-    try:
-        with request.urlopen(req) as resp:
-            print(resp.read().decode('utf-8'))
+    url = sys.argv[1]
+    email = sys.argv[2]
+    params = {"email": email}
+    utf_params = urllib.parse.urlencode(params).encode('utf-8')
+    reqs = urllib.request.Request(url, data=utf_params, method='POST')
+    with urllib.request.urlopen(reqs) as resp:
+        print(resp.read().decode('utf-8'))
